@@ -1,7 +1,8 @@
 import { ApiService } from './../../add-ons/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MustMatch } from 'src/app/add-ons/MustMatch';
 
 @Component({
   selector: 'app-createuser',
@@ -14,35 +15,32 @@ export class CreateuserComponent implements OnInit {
   id!: string;
   dataform!: FormGroup;
   responsedata: any;
+  submitted=false
   constructor(private router:Router,  private route: ActivatedRoute,private formBuilder: FormBuilder,
     private api:ApiService) { }
 
   ngOnInit(){
-    
-     this.id = this.route.snapshot.params['id'] 
-    this.addtion=this.api.editvalue,this.id
+    this.id = this.route.snapshot.params['id'] 
+    this.addtion=this.api.editvalue
      this.dataform = this.formBuilder.group({
       title: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       role: ['', Validators.required],
-      password: ['', [Validators.minLength(6),Validators.required , Validators.nullValidator]],
-      confirmPassword: ['', [Validators.minLength(6),Validators.required ,Validators.nullValidator]]
-  });
-
-    }
-
-  
-  get f() { return this.dataform.controls}
-  
-  formchange(){
-    this.changeform=!this.changeform
+      password: ['', [Validators.minLength(6),!this.addtion ? Validators.required: Validators.nullValidator]],
+      confirmPassword: ['', [Validators.minLength(6),!this.addtion ? Validators.required :Validators.nullValidator,MustMatch]]
+  },
+  {
+    validator: MustMatch('password', 'confirmPassword')
+});
   }
+  get f() { return this.dataform.controls; }
 
   saved(){
-    console.log(this.dataform.value)
-    this.api.create(this.dataform.value);
+    let user =this.dataform.value
+    console.log(user)
+    this.api.create(user);
     this.dataform.reset()
     this.router.navigate(['/user'])
   }
@@ -57,5 +55,8 @@ clear(){
   this.dataform.reset()
   this.router.navigate(['/user'])
 }
+get confirmPassword() {
+  return this.dataform.get('confirmPassword');
+} 
 
 }

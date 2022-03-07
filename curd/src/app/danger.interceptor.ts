@@ -7,21 +7,13 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { delay, Observable, of } from 'rxjs';
-import { Role } from './add-ons/role';
+
 
 
 // array in local storage for registered users
-const usersKey = 'angular-11-crud-example-users';
+const usersKey = 'USERS DATA';
 const usersJSON = localStorage.getItem(usersKey);
-let users: any[] = usersJSON ? JSON.parse(usersJSON) : [{
-    id: 1,
-    title: 'Mr',
-    firstName: 'Joe',
-    lastName: 'Bloggs',
-    email: 'joe@bloggs.com',
-    role: Role.Admin,
-    password: 'joe123'
-}];
+let users: any[] = usersJSON ? JSON.parse(usersJSON) : [];
 
 
 
@@ -56,7 +48,6 @@ export class DangerInterceptor implements HttpInterceptor {
 
   function createUser() {
     const user = body;
-
     if (user.find((x: { email: any; }) => x.email === user.email)) {
         return Error(`User with the email ${user.email} already exists`);
     }
@@ -65,6 +56,7 @@ export class DangerInterceptor implements HttpInterceptor {
     user.id = newUserId();
     delete user.confirmPassword;
     users.push(user);
+    console.log(users)
     localStorage.setItem(usersKey, JSON.stringify(users));
     return ok();
    
@@ -95,8 +87,7 @@ function updateUser() {
 
   // update and save user
   Object.assign(user, params);
-  localStorage.setItem(usersKey, JSON.stringify(users));
-
+  localStorage.setItem(usersKey, JSON.stringify(users));``
   return ok();
 }
 

@@ -25,7 +25,7 @@ getById(id: string) {
 }
 
 create(params: any) {
-    return this.http.post<Datas>(baseUrl+'/users',JSON.stringify(params)).pipe(catchError(this.errorHandler))
+    return this.http.post<Datas>(baseUrl+'/user',JSON.stringify(params)).pipe(catchError(this.errorHandler))
 }
 
 update(id: string, params: any) {
