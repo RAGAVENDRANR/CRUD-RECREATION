@@ -74,20 +74,44 @@ function getUsers() {
   return ok(users.map(x => basicDetails(x)));
 }
 
+
 function getUserById() {
-  throw new Error('Function not implemented.');
+  const user = users.find(x => x.id === idFromUrl());
+  return ok(basicDetails(user));
 }
 
 function updateUser() {
-  throw new Error('Function not implemented.');
+  let params = body;
+  let user = users.find(x => x.id === idFromUrl());
+
+  if (params.email !== user.email && users.find(x => x.email === params.email)) {
+      return Error(`User with the email ${params.email} already exists`);
+  }
+
+  // only update password if entered
+  if (!params.password) {
+      delete params.password;
+  }
+
+  // update and save user
+  Object.assign(user, params);
+  localStorage.setItem(usersKey, JSON.stringify(users));
+
+  return ok();
 }
 
 function deleteUser() {
-  throw new Error('Function not implemented.');
+  users = users.filter(x => x.id !== idFromUrl());
+  localStorage.setItem(usersKey, JSON.stringify(users));
+  return ok();
+}
+function idFromUrl() {
+  const urlParts = url.split('/');
+  return parseInt(urlParts[urlParts.length - 1]);
 }
 
-function newUserId(): any {
-  throw new Error('Function new users cant be created');
+function newUserId() {
+  return users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
 }
 function basicDetails(user: any) {
   const { id, title, firstName, lastName, email, role } = user;

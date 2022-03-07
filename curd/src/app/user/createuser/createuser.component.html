@@ -1,8 +1,8 @@
 <div class="p-4">
     <div class="container">
-    <h1 *ngIf="addtion">Add User</h1>
-    <h1 *ngIf="!addtion">Edit User</h1>
-    <form [formGroup]="dataform" (ngSubmit)="onSubmit()">
+    <h1 *ngIf="!addtion">Add User</h1>
+    <h1 *ngIf="addtion">Edit User</h1>
+    <form [formGroup]="dataform" >
         <div class="row">
             <div class="col-2">
                 <label>Title</label>
@@ -42,7 +42,7 @@
                 <span *ngIf="!dataform.get('role')?.valid && dataform.get('role')?.touched" class="er">*Role is required!</span>
             </div>
         </div><br>
-        <div *ngIf="!addtion">
+        <div *ngIf="addtion">
             <h3 class="pt-3">Change Password</h3>
             <p>Leave blank to keep the same password</p>
         </div>
@@ -60,9 +60,11 @@
         </div>
         <br>
         <div class="form-group">
-            <button [disabled]="!dataform.valid" class="btn btn-primary">Save</button>
+                <span  *ngIf="!addtion"><button [disabled]="!dataform.valid" class="btn btn-primary" (click)="saved()">Save</button></span>
+                <span *ngIf="addtion"><button [disabled]="!dataform.valid" class="btn btn-primary" (click)="updated()">Update</button></span>
             <button class="btn" (click)="clear()">Cancel</button>
         </div>
     </form>
     </div>
     </div>
+ 

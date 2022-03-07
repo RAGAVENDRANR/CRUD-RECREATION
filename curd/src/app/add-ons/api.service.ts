@@ -14,6 +14,8 @@ const baseUrl = `${environment.apiUrl}/users`;
 export class ApiService {
   constructor(private http:HttpClient) { }
 
+editvalue=false
+
  getAll() {
     return this.http.get(baseUrl).pipe(catchError(this.errorHandler))
 }

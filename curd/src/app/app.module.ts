@@ -8,7 +8,6 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { CreateuserComponent } from './user/createuser/createuser.component';
 import { ListuserComponent } from './user/listuser/listuser.component';
-import { UpdateuserComponent } from './user/updateuser/updateuser.component';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -22,8 +21,7 @@ import { DangerInterceptor } from './danger.interceptor';
     HomeComponent,
     UserComponent,
     CreateuserComponent,
-    ListuserComponent,
-    UpdateuserComponent
+    ListuserComponent
   ],
   imports: [
     BrowserModule,

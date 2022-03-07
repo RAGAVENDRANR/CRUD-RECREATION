@@ -15,12 +15,12 @@
             <tr *ngFor="let user of datalist">
                 <td>{{user.title}}{{user.firstName}}{{user.lastName}}</td>
                 <td>{{user.email}}</td>
-                <td>{{user.Role}}</td>
+                <td>{{user.role}}</td>
                 <td style="white-space: nowrap">
-                    <a routerLink="" class="btn btn-sm btn-primary mr-1">Edit</a>
-                    <button (click)="deleteUser()" class="btn btn-sm btn-danger btn-delete-user" [disabled]="">
+                    <button (click)="updateuser()" class="btn btn-sm btn-primary mr-1">Edit</button>
+                    <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="">
                         <span *ngIf="" class="spinner-border spinner-border-sm"></span>
-                        <span *ngIf="">Delete</span>
+                    Delete
                     </button>
                 </td>
             </tr>
@@ -33,3 +33,5 @@
     </table>
     </div>
     </div>
+    
+    

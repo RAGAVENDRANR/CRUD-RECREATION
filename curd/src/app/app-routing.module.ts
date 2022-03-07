@@ -1,4 +1,3 @@
-import { UpdateuserComponent } from './user/updateuser/updateuser.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,7 +13,6 @@ children:[
   {path:'',component:ListuserComponent},
   {path:'createuser',component:CreateuserComponent},
   {path:'listuser',component:ListuserComponent},
-  {path:'updateuser',component:UpdateuserComponent}
 ]},
 {path:'**',redirectTo:'home',pathMatch:'full'}
 ];
