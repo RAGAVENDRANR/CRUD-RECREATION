@@ -1,3 +1,4 @@
+import { ApiService } from './../../add-ons/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,11 +11,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CreateuserComponent implements OnInit {
   addtion=true;
   changeform=false;
-  submitted = false;
   id!: string;
   dataform!: FormGroup;
   users:any=[];
-  constructor(private router:Router,  private route: ActivatedRoute,private formBuilder: FormBuilder) { }
+  responsedata: any;
+  constructor(private router:Router,  private route: ActivatedRoute,private formBuilder: FormBuilder,
+    private api:ApiService) { }
 
   ngOnInit(){
      this.id = this.route.snapshot.params['id'] 
@@ -28,7 +30,8 @@ export class CreateuserComponent implements OnInit {
       password: ['', [Validators.minLength(6),Validators.required , Validators.nullValidator]],
       confirmPassword: ['', [Validators.minLength(6),Validators.required ,Validators.nullValidator]]
   });
-
+this.api.getAll().subscribe((res:any)=>this.responsedata=res),
+console.log(this.responsedata)
     }
 
   
@@ -39,10 +42,11 @@ export class CreateuserComponent implements OnInit {
   }
 
   onSubmit(){
-    this.submitted = true;
     console.log(this.dataform.value)
-    this.dataform.reset()
     this.users.push(this.dataform.value);
+    this.api.create(this.dataform.value);
+    console.log(this.users)
+    this.dataform.reset()
     this.router.navigate(['/user'])
   }
 clear(){

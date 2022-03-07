@@ -13,7 +13,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ApiService } from './add-ons/api.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DangerInterceptor } from './danger.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [ApiService],
+  providers: [ApiService,
+    {provide:HTTP_INTERCEPTORS,useClass:DangerInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

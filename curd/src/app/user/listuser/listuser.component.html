@@ -2,7 +2,7 @@
     <div class="container">
     <h1>Users</h1>
     <button  class="btn btn-sm btn-success mb-2" (click)="formchange()">Add User</button>
-    <table class="table table-striped">
+    <table class="table table-striped" >
         <thead>
             <tr>
                 <th style="width: 30%">Name</th>
@@ -12,10 +12,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of users">
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let user of datalist">
+                <td>{{user.title}}{{user.firstName}}{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.Role}}</td>
                 <td style="white-space: nowrap">
                     <a routerLink="" class="btn btn-sm btn-primary mr-1">Edit</a>
                     <button (click)="deleteUser()" class="btn btn-sm btn-danger btn-delete-user" [disabled]="">
@@ -24,7 +24,7 @@
                     </button>
                 </td>
             </tr>
-            <tr *ngIf="!users">
+            <tr *ngIf="!datalist">
                 <td colspan="4" class="text-center">
                     <span class="spinner-border spinner-border-lg align-center"></span>
                 </td>
