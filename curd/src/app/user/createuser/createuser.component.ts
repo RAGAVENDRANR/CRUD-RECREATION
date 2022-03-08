@@ -55,7 +55,7 @@ if (this.addtion) {
     !this.addtion ? this.saved() : this.updated();
   }
 //create user method 
-  saved(){
+  public saved(){
     let user =this.dataform.value
     console.log(user)
     //passing the userdetatiles to local storage 
@@ -64,15 +64,16 @@ if (this.addtion) {
     this.router.navigate(['/user/listuser'])
   }
 // update method for the user
-  updated(){
-    let user = this.dataform.value
-    console.log(user)
+  public updated(){
+    let users = this.dataform.value
+    console.log("UPDATE METHOD CALLED ON TS")
+    console.log(users)
     // updating the user detatiles
-    this.api.update(user,this.id)
+    this.api.update(this.id,users).subscribe()
     this.dataform.reset()
-    this.router.navigate(['/user/listuser'])
     // setting the value false for making the form to create user mode
     this.api.editvalue=false
+    this.router.navigate(['/user/listuser'])
   }
 
 clear(){

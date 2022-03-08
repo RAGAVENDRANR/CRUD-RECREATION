@@ -4,7 +4,8 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpResponse
+  HttpResponse,
+  HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { delay, Observable, of} from 'rxjs';
 import { Role } from './add-ons/role';
@@ -140,4 +141,9 @@ function ok(body?: any) { return of(new HttpResponse({ status: 200, body })).pip
 
 }
 
-
+export const fakeBackendProvider = {
+  // use fake backend in place of Http service for backend-less development
+  provide: HTTP_INTERCEPTORS,
+  useClass: DangerInterceptor,
+  multi: true
+};
