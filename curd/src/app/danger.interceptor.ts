@@ -71,7 +71,7 @@ export class DangerInterceptor implements HttpInterceptor{
   function createUser() {
     console.log('post method called')
     let user = body;
-  //  if (user.find((x: { email: any; }) => x.email === user.email)) {return Error(`User with the email ${user.email} already exists`);}
+    // if (user.find((x:any) => x.email === user.email)){return Error(`User with the email already exists`);}
     user.id = newUserId();
     delete user.confirmPassword;
     console.log(user);
@@ -133,9 +133,6 @@ function newUserId() {
 }
 
 function basicDetails(user: any) {
-  
-  // const { id, title, firstName, lastName, email, role } = user;
-  
   return user;
 }
 function ok(body?: any) { return of(new HttpResponse({ status: 200, body })).pipe(delay(500));}

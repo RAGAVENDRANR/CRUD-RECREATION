@@ -24,10 +24,6 @@ getById(id: string) {
     return this.http.get(`${baseUrl}/${id}`).pipe(catchError(this.errorHandler))
 }
 
-// create(params: any) {
-//     return this.http.post<Datas>(baseUrl+'/user',JSON.stringify(params)).pipe(catchError(this.errorHandler))
-// }
-
 create(params: any) {
   return this.http.post<Datas>(baseUrl,params).pipe(catchError(this.errorHandler))
 }
