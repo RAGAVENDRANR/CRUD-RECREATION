@@ -31,11 +31,11 @@ getById(id: any) {
 create(params: any) {
   return this.http.post<Datas>(baseUrl,params).pipe(catchError(this.errorHandler))
 }
-update(id: string, params: any) {
+update(id: any, params: any) {
     return this.http.put(`${baseUrl}/${id}`, params).pipe(catchError(this.errorHandler))
 }
 
-delete(id: string) {
+delete(id: any) {
     return this.http.delete(`${baseUrl}/${id}`).pipe(catchError(this.errorHandler))
 }
 errorHandler(error: { error: { message: string; }; status: any; message: any; }) {
@@ -45,10 +45,10 @@ errorHandler(error: { error: { message: string; }; status: any; message: any; })
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      errorMessage = `Error Code:${error.status}\nMessage: ${error.message}`;
     }
     console.log(errorMessage);
-    window.alert(errorMessage);
+     window.alert(errorMessage);
     return throwError(errorMessage);
  }
 }

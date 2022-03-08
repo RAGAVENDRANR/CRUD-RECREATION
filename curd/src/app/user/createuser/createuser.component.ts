@@ -70,7 +70,6 @@ if (this.addtion) {
     // updating the user detatiles
     this.api.update(user,this.id)
     this.dataform.reset()
-    this.updatedarray.clear();
     this.router.navigate(['/user/listuser'])
     // setting the value false for making the form to create user mode
     this.api.editvalue=false
