@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import {Datas} from '../add-ons/datas'
@@ -11,28 +11,31 @@ const baseUrl = `${environment.apiUrl}/users`;
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class ApiService implements OnInit {
   constructor(private http:HttpClient) { }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
-editvalue=false
+editvalue=false;
+idvalue!: any;
 
  getAll() {
     return this.http.get(baseUrl).pipe(catchError(this.errorHandler))
 }
 
-getById(id: string) {
+getById(id: any) {
     return this.http.get(`${baseUrl}/${id}`).pipe(catchError(this.errorHandler))
 }
 
 create(params: any) {
-    return this.http.post<Datas>(baseUrl+'/user',JSON.stringify(params)).pipe(catchError(this.errorHandler))
+  return this.http.post<Datas>(baseUrl,params).pipe(catchError(this.errorHandler))
 }
-
-update(id: string, params: any) {
+update(id: any, params: any) {
     return this.http.put(`${baseUrl}/${id}`, params).pipe(catchError(this.errorHandler))
 }
 
-delete(id: string) {
+delete(id: any) {
     return this.http.delete(`${baseUrl}/${id}`).pipe(catchError(this.errorHandler))
 }
 errorHandler(error: { error: { message: string; }; status: any; message: any; }) {
@@ -42,10 +45,10 @@ errorHandler(error: { error: { message: string; }; status: any; message: any; })
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      errorMessage = `Error Code:${error.status}\nMessage: ${error.message}`;
     }
     console.log(errorMessage);
-    window.alert(errorMessage);
+     window.alert(errorMessage);
     return throwError(errorMessage);
  }
 }

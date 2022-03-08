@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
   userpage(){
-this.router.navigate(['/user'])
+this.router.navigate(['/user/listuser'])
+// localStorage.clear()
   }
 }
