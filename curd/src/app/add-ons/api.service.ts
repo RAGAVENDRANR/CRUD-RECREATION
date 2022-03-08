@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import {Datas} from '../add-ons/datas'
@@ -11,16 +11,20 @@ const baseUrl = `${environment.apiUrl}/users`;
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class ApiService implements OnInit {
   constructor(private http:HttpClient) { }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
-editvalue=false
+editvalue=false;
+idvalue!: any;
 
  getAll() {
     return this.http.get(baseUrl).pipe(catchError(this.errorHandler))
 }
 
-getById(id: string) {
+getById(id: any) {
     return this.http.get(`${baseUrl}/${id}`).pipe(catchError(this.errorHandler))
 }
 

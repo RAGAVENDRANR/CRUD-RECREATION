@@ -57,7 +57,7 @@
                 <label>Confirm Password</label>
                 <input type="password" formControlName="confirmPassword" class="form-control" />
                 <span *ngIf="!dataform.get('confirmPassword')?.valid && dataform.get('confirmPassword')?.touched " class="er">*Confirm Password is required! && Must Match</span><br>
-                <span *ngIf="dataform.get('confirmPassword')?.errors" class="er">*Passwords must match</span>
+                <span *ngIf="dataform.controls['confirmPassword'].errors?.['MustMatch']" class="er">*Passwords must match</span>
             </div>
         </div>
         <br>

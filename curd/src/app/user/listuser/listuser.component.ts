@@ -10,27 +10,30 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./listuser.component.scss']
 })
 export class ListuserComponent implements OnInit {
+
+  // stores the data from the local storage
   datalist:any=[]
-  responsedata:any=[]
+ 
   constructor(public router:Router,private api:ApiService) { }
  
-  ngOnInit(): void {
-    console.log("component inatilized")
-    this.api.getAll().subscribe((response:any)=>this.datalist=response);
-    
+  // data from the local storage was called 
+  ngOnInit(){
+    this.api.getAll().subscribe((response:any)=>this.datalist=response)
   }
-  updateuser(){
+
+  // when Edit button clicked here and id was passed to the service
+  updateuser(id:any){
     this.api.editvalue=true;
+    this.api.idvalue=id
+    console.log(id)
     this.router.navigate(['user/createuser']) 
   }
 
+  //Delete button was clicked and the api call occurs
   deleteUser(id:any){
-    this.api.delete(id)
-        .pipe(first())
-        .subscribe(() => this.datalist = this.datalist.filter((x: { id: any; }) => x.id !== id));
-  };
-
-  formchange(){
-  this.router.navigate(['/user/createuser']);
+    this.api.delete(id).subscribe(() => this.datalist = this.datalist.filter((res:any) => res.id !== id))
   }
+  
+//navigates to the createuser component
+  adduser(){this.router.navigate(['/user/createuser'])}
 }

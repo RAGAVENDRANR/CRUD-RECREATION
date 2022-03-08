@@ -106,7 +106,7 @@ function updateUser() {
   }
 
   Object.assign(user, params);
-  localStorage.setItem(usersKey, JSON.stringify(users));``
+  localStorage.setItem(usersKey, JSON.stringify(users));
   return ok();
 }
 
