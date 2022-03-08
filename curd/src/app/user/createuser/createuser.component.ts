@@ -35,12 +35,16 @@ export class CreateuserComponent implements OnInit {
     validator: MustMatch('password', 'confirmPassword')
 });
   }
-  get f() { return this.dataform.controls; }
+  // get f() { return this.dataform.controls; }
+
+  onFormSubmit() {
+    !this.addtion ? this.saved() : this.updated();
+  }
 
   saved(){
     let user =this.dataform.value
     console.log(user)
-    this.api.create(user);
+    this.api.create(user).subscribe((ref:any)=>console.log(ref));
     this.dataform.reset()
     this.router.navigate(['/user'])
   }

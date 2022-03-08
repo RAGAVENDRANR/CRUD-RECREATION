@@ -15,7 +15,9 @@ export class ListuserComponent implements OnInit {
   constructor(public router:Router,private api:ApiService) { }
  
   ngOnInit(): void {
+    console.log("component inatilized")
     this.api.getAll().subscribe((response:any)=>this.datalist=response);
+    
   }
   updateuser(){
     this.api.editvalue=true;
@@ -29,6 +31,6 @@ export class ListuserComponent implements OnInit {
   };
 
   formchange(){
-  this.router.navigate(['/user/createuser'])
+  this.router.navigate(['/user/createuser']);
   }
 }
