@@ -25,7 +25,6 @@ export class ListuserComponent implements OnInit {
   updateuser(id:any){
     this.api.editvalue=true;
     this.api.idvalue=id
-    console.log(id)
     this.router.navigate(['user/createuser']) 
   }
 
