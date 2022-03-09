@@ -16,12 +16,6 @@ export class CreateuserComponent implements OnInit {
   dataform!: FormGroup;
   newdata:any=[];
 
-//not required
- // changeform=false;
-  // responsedata: any;
-  // submitted=false;
-  // updatedarray:any=[];
-
   constructor(
     private router:Router,
     private f: FormBuilder,
@@ -72,7 +66,7 @@ if (this.addtion) {
 // update method for the user
   public updated(){
     let users = this.dataform.value
-    console.log("UPDATE METHOD CALLED ON TS")
+    console.log("Update method called for the component")
     console.log(users)
     // updating the user detatiles
     this.api.update(this.id,users).subscribe()
