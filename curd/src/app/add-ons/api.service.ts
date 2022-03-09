@@ -13,13 +13,12 @@ const baseUrl = `${environment.apiUrl}/users`;
 })
 export class ApiService implements OnInit {
   constructor(private http:HttpClient) { }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
+  ngOnInit(){}
+// used to add or edit the form
 editvalue=false;
+//pass the id value
 idvalue!: any;
-
+//pipe is used to transform the data into response
  getAll() {
     return this.http.get(baseUrl).pipe(catchError(this.errorHandler))
 }
@@ -38,6 +37,8 @@ update(id: any, params: any) {
 delete(id: any) {
     return this.http.delete(`${baseUrl}/${id}`).pipe(catchError(this.errorHandler))
 }
+
+
 errorHandler(error: { error: { message: string; }; status: any; message: any; }) {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {
@@ -45,7 +46,7 @@ errorHandler(error: { error: { message: string; }; status: any; message: any; })
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code:${error.status}\nMessage: ${error.message}`;
+      errorMessage = `Message: ${error.message}`;
     }
     console.log(errorMessage);
      window.alert(errorMessage);

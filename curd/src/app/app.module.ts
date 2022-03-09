@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ApiService } from './add-ons/api.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { DangerInterceptor, fakeBackendProvider } from './danger.interceptor';
+import { DangerInterceptor } from './danger.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,8 +34,7 @@ import { DangerInterceptor, fakeBackendProvider } from './danger.interceptor';
   ],
   providers: [ApiService,
     {provide:HTTP_INTERCEPTORS,useClass:DangerInterceptor,multi:true},
-   // provider used to create fake backend
-   fakeBackendProvider],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,11 +1,10 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
   HttpResponse,
-  HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { delay, Observable, of} from 'rxjs';
 import { Role } from './add-ons/role';
@@ -15,18 +14,10 @@ import { Role } from './add-ons/role';
 // array in local storage for registered users
 const usersKey = 'USERS DATA';
 const usersJSON = localStorage.getItem(usersKey);
+//json parse is used dto convert the jsonstring into object
 let users: any[] = usersJSON ? JSON.parse(usersJSON) : [
-  {
-    id: 1,
-    title: 'Mr',
-    firstName: 'Joe',
-    lastName: 'Bloggs',
-    email: 'joe@bloggs.com',
-    role: Role.Admin,
-    password: 'joe123'
-},
 {
-  id: 2,
+  id: 1,
   title: 'Mr',
   firstName: 'RAGAVENDRAN',
   lastName: 'R',
@@ -44,14 +35,15 @@ export class DangerInterceptor implements HttpInterceptor{
   constructor() {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const { url, method,headers,body } = request;
+    const { url, method,body } = request;
 
     return <any>handleRoute();
 
     function handleRoute() {
 
-      console.log('Interceptor function called 02')
+      console.log('Interceptor function tiggered')
       console.log(method)
+
         switch (true) {
             case url.endsWith('/users') && method === 'GET':
                 return getUsers();
@@ -70,25 +62,25 @@ export class DangerInterceptor implements HttpInterceptor{
   }
 
   function createUser() {
-    console.log('post method called')
     let user = body;
-    // if (user.find((x:any) => x.email === user.email)){return Error(`User with the email already exists`);}
     user.id = newUserId();
     delete user.confirmPassword;
-    console.log(user);
     users.push(user);
+    //stringify used to convert array to string.
     localStorage.setItem(usersKey, JSON.stringify(users));
     return ok();
 }
 
 
 function getUsers() {
-  localStorage. getItem('key')
+  localStorage.getItem('key')
+  //itaration of array
   return ok(users.map(x => basicDetails(x)));
 }
 
 
 function getUserById() {
+  //find used to find array predication (true/undefined)
   let user = users.find(x => x.id === idFromUrl());
   return ok(basicDetails(user));
 }
@@ -99,7 +91,7 @@ function updateUser() {
   let user = users.find(x => x.id === idFromUrl());
 
   if (params.email !== user.email && users.find(x => x.email === params.email)) {
-      return Error(`User with the email ${params.email} already exists`);
+      return Error(`User with the email already exists`);
   }
 
   if (!params.password) {
@@ -123,7 +115,8 @@ function deleteUser() {
 function idFromUrl() {
   
   const urlParts = url.split('/');
-  
+
+  //used to convert the string into integer
   return parseInt(urlParts[urlParts.length - 1]);
 }
 
@@ -136,14 +129,10 @@ function newUserId() {
 function basicDetails(user: any) {
   return user;
 }
+// of is used to create an observable 
 function ok(body?: any) { return of(new HttpResponse({ status: 200, body })).pipe(delay(500));}
 }
 
 }
 
-export const fakeBackendProvider = {
-  // use fake backend in place of Http service for backend-less development
-  provide: HTTP_INTERCEPTORS,
-  useClass: DangerInterceptor,
-  multi: true
-};
+

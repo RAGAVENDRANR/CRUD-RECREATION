@@ -11,16 +11,22 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./createuser.component.scss']
 })
 export class CreateuserComponent implements OnInit {
-  addtion!: boolean;
-  changeform=false;
+  addtion!: boolean; 
   id!: any;
   dataform!: FormGroup;
-  responsedata: any;
-  submitted=false;
   newdata:any=[];
-  updatedarray:any=[];
-  constructor(private router:Router,private f: FormBuilder,
-    private api:ApiService) { }
+
+//not required
+ // changeform=false;
+  // responsedata: any;
+  // submitted=false;
+  // updatedarray:any=[];
+
+  constructor(
+    private router:Router,
+    private f: FormBuilder,
+    private api:ApiService
+    ) { }
 
   ngOnInit(){
     //id value received from the service

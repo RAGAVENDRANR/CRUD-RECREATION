@@ -1,8 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/add-ons/api.service';
-import { first } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-listuser',
@@ -13,7 +11,7 @@ export class ListuserComponent implements OnInit {
 
   // stores the data from the local storage
   datalist:any=[]
- 
+
   constructor(public router:Router,private api:ApiService) { }
  
   // data from the local storage was called 
