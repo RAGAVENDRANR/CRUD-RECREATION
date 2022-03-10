@@ -10,10 +10,12 @@ import { CreateuserComponent } from './user/createuser/createuser.component';
 import { ListuserComponent } from './user/listuser/listuser.component';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ToastrModule } from 'ngx-toastr';
 import { ApiService } from './add-ons/api.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DangerInterceptor } from './danger.interceptor';
+import { SupportComponent } from './support/support.component';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { DangerInterceptor } from './danger.interceptor';
     HomeComponent,
     UserComponent,
     CreateuserComponent,
-    ListuserComponent
+    ListuserComponent,
+    SupportComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,9 @@ import { DangerInterceptor } from './danger.interceptor';
     ReactiveFormsModule,
     MatIconModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    ToastrModule,
+    HttpClientModule,
+    ToastModule
   ],
   providers: [ApiService,
     {provide:HTTP_INTERCEPTORS,useClass:DangerInterceptor,multi:true},

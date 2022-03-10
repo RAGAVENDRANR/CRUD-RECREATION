@@ -23,12 +23,9 @@ let users: any[] = usersJSON ? JSON.parse(usersJSON) : [
   lastName: 'R',
   email: 'hi@gmail.com',
   role: Role.Admin,
-  password: 'joe123'
+  password: '123456789'
 }
 ];
-
-
-
 @Injectable()
 export class DangerInterceptor implements HttpInterceptor{
 
@@ -60,7 +57,6 @@ export class DangerInterceptor implements HttpInterceptor{
                 return next.handle(request);
         }    
   }
-
   function createUser() {
     let user = body;
     user.id = newUserId();
@@ -70,69 +66,48 @@ export class DangerInterceptor implements HttpInterceptor{
     localStorage.setItem(usersKey, JSON.stringify(users));
     return ok();
 }
-
-
 function getUsers() {
   localStorage.getItem('key')
   //itaration of array
   return ok(users.map(x => basicDetails(x)));
 }
-
-
 function getUserById() {
   //find used to find array predication (true/undefined)
   let user = users.find(x => x.id === idFromUrl());
   return ok(basicDetails(user));
 }
-
 function updateUser() {
   let params = body;
-  
   let user = users.find(x => x.id === idFromUrl());
-
-  if (params.email !== user.email && users.find(x => x.email === params.email)) {
-      return Error(`User with the email already exists`);
-  }
-
-  if (!params.password) {
-      delete params.password;
-  }
-
+  // if (params.email !== user.email && users.find(x => x.email === params.email)) {
+  //     return Error(`User with the email already exists`);
+  // }
+  // if (!params.password) {
+  //     delete params.password;
+  // }
   Object.assign(user, params);
   localStorage.setItem(usersKey, JSON.stringify(users));
   return ok();
 }
-
 function deleteUser() {
-
   users = users.filter(x => x.id !== idFromUrl());
-  
   localStorage.setItem(usersKey, JSON.stringify(users));
-  
   return ok();
 }
-
-function idFromUrl() {
-  
+function idFromUrl() { 
   const urlParts = url.split('/');
-
   //used to convert the string into integer
   return parseInt(urlParts[urlParts.length - 1]);
 }
-
 function newUserId() {
- 
   return users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
-
 }
-
 function basicDetails(user: any) {
   return user;
 }
 // of is used to create an observable 
 function ok(body?: any) { return of(new HttpResponse({ status: 200, body })).pipe(delay(500));}
 }
-
 }
 
 

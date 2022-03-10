@@ -1,9 +1,8 @@
 import { ApiService } from './../../add-ons/api.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from 'src/app/add-ons/MustMatch';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-createuser',

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { CreateuserComponent } from './user/createuser/createuser.component';
 import { ListuserComponent } from './user/listuser/listuser.component';
+import { SupportComponent } from './support/support.component';
 
 const routes: Routes = [
 {path:'',component:HomeComponent},
@@ -14,6 +15,7 @@ children:[
   {path:'createuser',component:CreateuserComponent},
   {path:'listuser',component:ListuserComponent},
 ]},
+{path:'support',component:SupportComponent},
 {path:'**',redirectTo:'home',pathMatch:'full'}
 ];
 
