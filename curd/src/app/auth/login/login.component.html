@@ -1,0 +1,47 @@
+<div class="form-group">
+    <form [formGroup]="loginform" class="login">
+       
+        <label class="title">
+            <h3 class="welcome">Welcome to</h3>
+            Company Product Name
+            <h5 class="hint">Use your Company ID to sign in or create one now</h5>
+        </label>
+       
+        <div class="form-group">
+            
+            <input required class="username" 
+              name="email" 
+              formControlName="email" 
+              type="email" 
+              id="login_username" 
+              class="form-control inp"
+              placeholder="Email">
+            
+            <input required class="password" 
+              name="password" 
+              formControlName="password"
+              type="password" 
+              id="login_password" 
+              class="form-control inp"
+              placeholder="Password">
+
+              <ngx-recaptcha2 #captchaElem
+              siteKey="6Lddac4eAAAAAAWF7hS_tHUg1iJMB4bGNPt9imA5"
+              formControlName="recaptcha"
+              class=""
+              >
+            </ngx-recaptcha2>
+            
+            <button type="submit" 
+              class="btn btn-primary"
+              [disabled]="loginform.invalid"
+              (click)="onsubmit()"
+              >
+                Login
+            </button>
+           
+            <a routerLink="auth/signup" class="signup">Sign up for an Account</a>
+          </div>
+
+    </form>
+</div>
