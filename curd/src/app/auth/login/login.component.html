@@ -25,12 +25,12 @@
               class="form-control inp"
               placeholder="Password">
 
-              <ngx-recaptcha2 #captchaElem
+              <!-- <ngx-recaptcha2 #captchaElem
               siteKey="6Lddac4eAAAAAAWF7hS_tHUg1iJMB4bGNPt9imA5"
               formControlName="recaptcha"
               class=""
               >
-            </ngx-recaptcha2>
+            </ngx-recaptcha2> -->
             
             <button type="submit" 
               class="btn btn-primary"
@@ -40,7 +40,7 @@
                 Login
             </button>
            
-            <a routerLink="auth/signup" class="signup">Sign up for an Account</a>
+            <button (click)="signup()" class="btn btn-secondary">Signup</button>
           </div>
 
     </form>

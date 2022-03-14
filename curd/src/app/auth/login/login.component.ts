@@ -1,5 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,17 +10,19 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
   loginform: FormGroup;
 
-  constructor() { 
+  constructor(private router:Router) { 
     this.loginform=new FormGroup({
       email:new FormControl('',[Validators.required,Validators.email]),
       password:new FormControl('',[Validators.required,Validators.nullValidator,Validators.minLength(3),Validators.maxLength(12)]), 
-      recaptcha:new FormControl ('', Validators.required)
+      // recaptcha:new FormControl ('', Validators.required)
     })
   }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(){}
 onsubmit(){
-  console.log(this.loginform.value)
+  this.loginform.reset()
+  this.router.navigate(['dashboard'])
+}
+signup(){
+  this.router.navigate(['auth/signup'])
 }
 }
