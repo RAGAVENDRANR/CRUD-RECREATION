@@ -1,1 +1,72 @@
-<p>createuser works!</p>
+<div class="p-4">
+    <div class="container">
+    <h1 *ngIf="!addtion">Add User</h1>
+    <h1 *ngIf="addtion">Edit User</h1>
+    <form [formGroup]="dataform" (ngSubmit)="onFormSubmit()">
+        <div class="row">
+            <div class="col-2">
+                <label>Title</label> 
+                <select formControlName="title" class="form-control" >
+                    <option value="" selected>- - Select Title - -</option>
+                    <option value="Mr">Mr</option>
+                    <option value="Mrs">Mrs</option>
+                    <option value="Miss">Miss</option>
+                    <option value="Ms">Ms</option>
+                </select>
+                <span *ngIf="!dataform.get('title')?.valid && dataform.get('title')?.touched" class="er">*Titile is required!</span>
+            </div>
+            <div class=" col-5">
+                <label>First Name</label>
+                <input type="text" formControlName="firstName" class="form-control"  />
+                <span *ngIf="!dataform.get('firstName')?.valid && dataform.get('firstName')?.touched" class="er">*First Name is required!</span>
+            </div>
+            
+            <div class=" col-5">
+                <label>Last Name</label>
+                <input type="text" formControlName="lastName" class="form-control" />
+                <span *ngIf="!dataform.get('lastName')?.valid && dataform.get('lastName')?.touched" class="er">*Last Name is required!</span>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col">
+                <label>Email</label>
+                <input type="text" formControlName="email" class="form-control"/>
+                <span *ngIf="!dataform.get('email')?.valid && dataform.get('email')?.touched" class="er">*Email is required!</span>
+            </div>
+            <div class="col-5">
+                <label>Role</label>
+                <select formControlName="role" class="form-control">
+                    <option value=""> - - Select the Role - - </option>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                <span *ngIf="!dataform.get('role')?.valid && dataform.get('role')?.touched" class="er">*Role is required!</span>
+            </div>
+        </div><br>
+        <div *ngIf="addtion">
+            <h3 class="pt-3">Change Password</h3>
+            <p>Leave blank to keep the same password</p>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Password</label>
+                <input type="password" formControlName="password" class="form-control"  />
+                <span *ngIf="!dataform.get('password')?.valid && dataform.get('password')?.touched" class="er">*Password is required!</span>
+            </div>
+            <div class="col">
+                <label>Confirm Password</label>
+                <input type="password" formControlName="confirmPassword" class="form-control" />
+                <span *ngIf="!dataform.get('confirmPassword')?.valid && dataform.get('confirmPassword')?.touched " class="er">*Confirm Password is required! && Must Match</span><br>
+                <span *ngIf="dataform.controls['confirmPassword'].errors?.['MustMatch']" class="er">*Passwords must match</span>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+                <span  *ngIf="!addtion"><button [disabled]="!dataform.valid" class="btn btn-primary" >Save</button></span>
+                <span *ngIf="addtion"><button [disabled]="!dataform.valid" class="btn btn-primary">Update</button></span>
+            <button class="btn" (click)="clear()">Cancel</button>
+        </div>
+    </form>
+    </div>
+    </div>
+ 

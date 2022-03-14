@@ -1,1 +1,34 @@
-<p>listuser works!</p>
+<div class="p-4">
+    <div class="container">
+    <h1>Users</h1>
+    <button  class="btn btn-sm btn-success mb-2" (click)="adduser()">Add User</button>
+    <table class="table table-striped" >
+        <thead>
+            <tr>
+                <th style="width: 30%">Name</th>
+                <th style="width: 30%">Email</th>
+                <th style="width: 30%">Role</th>
+                <th style="width: 10%">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of datalist">
+                <td>{{user.title}} {{user.firstName}} {{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
+                <td style="white-space: nowrap">
+                    <button (click)="updateuser(user.id)" class="btn btn-sm btn-primary mx-3">Edit</button>
+                    <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user mx-3">Delete</button>
+                </td>
+            </tr>
+            <tr *ngIf="!datalist">
+                <td colspan="4" class="text-center">
+                    <span class="spinner-border spinner-border-lg align-center"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+    
+    
